@@ -1,0 +1,34 @@
+name: Deploy to Firebase Hosting (Flutter Web)
+
+on:
+  push:
+    # mainブランチにプッシュされた時にこのアクションが実行されます
+    branches:
+      - main
+  # GitHub Actionsの画面から手動で実行できるようにする設定
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. リポジトリのチェックアウト
+      - uses: actions/checkout@v4
+
+      # 2. Flutter環境のセットアップ
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7' 
+          channel: 'stable'
+
+      - run: flutter pub get
+
+      - run: flutter build web --release
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_DEPLOY_TOKEN }} # ここにトークンを使用
+          projectId: shinobi-converter-alpha
+          channelId: live
+          target: hosting
