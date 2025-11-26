@@ -25,11 +25,11 @@ jobs:
 
       - run: flutter build web --release
 
-      - uses: firebaseextended/action-hosting-deploy@v1
+      - uses: firebaseextended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           projectId: shinobi-converter-alpha
-          channelId: live
+          channelId: live 
           target: hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
