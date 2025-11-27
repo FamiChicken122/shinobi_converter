@@ -71,15 +71,18 @@ class _State extends State<MyHomePage> {
                             SizedBox(
                               width: widgetWidth,
                               height: widgetHeight,
-                              child: TextField(
-                                controller: _textController,
-                                maxLines: null,
-                                expands: true,
-                                textAlignVertical: TextAlignVertical.top,
-                                keyboardType: TextInputType.multiline,
-                                decoration: const InputDecoration(
-                                  labelText: 'テキストを入力してください',
-                                  border: OutlineInputBorder(gapPadding: 3.0),
+                              child: ColoredBox(
+                                color: Color(0x80FFFFFF),
+                                child: TextField(
+                                  controller: _textController,
+                                  maxLines: null,
+                                  expands: true,
+                                  textAlignVertical: TextAlignVertical.top,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: const InputDecoration(
+                                    labelText: 'テキストを入力してください',
+                                    border: OutlineInputBorder(gapPadding: 3.0),
+                                  ),
                                 ),
                               ),
                             ),
@@ -108,6 +111,7 @@ class _State extends State<MyHomePage> {
                               height: widgetHeight,
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
+                                  color: const Color(0x80FFFFFF),
                                   border: BoxBorder.all(color: Colors.black),
                                 ),
                                 child: Padding(
