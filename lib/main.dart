@@ -49,73 +49,88 @@ class _State extends State<MyHomePage> {
         return BlocBuilder<ConvertBloc, String>(
           builder: (context, state) {
             return Scaffold(
+              backgroundColor: Colors.white,
               body: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: widgetWidth,
-                          height: widgetHeight,
-                          child: TextField(
-                            controller: _textController,
-                            maxLines: null,
-                            expands: true,
-                            textAlignVertical: TextAlignVertical.top,
-                            keyboardType: TextInputType.multiline,
-                            decoration: const InputDecoration(
-                              labelText: 'テキストを入力してください',
-                              border: OutlineInputBorder(gapPadding: 3.0),
-                            ),
-                          ),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        image: DecorationImage(
+                          image: AssetImage('assets/iMac.jpg'),
+                          fit: BoxFit.cover,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: FloatingActionButton(
-                            onPressed: _pasteFromClipboard,
-                            tooltip: '貼り付け',
-                            child: const Icon(Icons.content_paste),
-                          ),
-                        ),
-                      ],
-                    ),
-                    FloatingActionButton(
-                      onPressed: () => context.read<ConvertBloc>().add(
-                        ConvertEvent(text: _textController.text),
                       ),
-                      tooltip: '変換',
-                      child: const Icon(Icons.arrow_forward),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: widgetWidth,
-                          height: widgetHeight,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              border: BoxBorder.all(color: Colors.black),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: SelectableText(
-                                context.read<ConvertBloc>().state,
-                                style: TextStyle(fontSize: 16),
-                                textAlign: TextAlign.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: widgetWidth,
+                              height: widgetHeight,
+                              child: TextField(
+                                controller: _textController,
+                                maxLines: null,
+                                expands: true,
+                                textAlignVertical: TextAlignVertical.top,
+                                keyboardType: TextInputType.multiline,
+                                decoration: const InputDecoration(
+                                  labelText: 'テキストを入力してください',
+                                  border: OutlineInputBorder(gapPadding: 3.0),
+                                ),
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: FloatingActionButton(
+                                onPressed: _pasteFromClipboard,
+                                tooltip: '貼り付け',
+                                child: const Icon(Icons.content_paste),
+                              ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: FloatingActionButton(
-                            tooltip: 'コピー',
-                            onPressed: () =>
-                                Clipboard.setData(ClipboardData(text: state)),
-                            child: const Icon(Icons.copy),
+                        FloatingActionButton(
+                          onPressed: () => context.read<ConvertBloc>().add(
+                            ConvertEvent(text: _textController.text),
                           ),
+                          tooltip: '変換',
+                          child: const Icon(Icons.arrow_forward),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: widgetWidth,
+                              height: widgetHeight,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: BoxBorder.all(color: Colors.black),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: SelectableText(
+                                    context.read<ConvertBloc>().state,
+                                    style: TextStyle(fontSize: 16),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: FloatingActionButton(
+                                tooltip: 'コピー',
+                                onPressed: () => Clipboard.setData(
+                                  ClipboardData(text: state),
+                                ),
+                                child: const Icon(Icons.copy),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
