@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:henkanki/trans.dart';
 
 class ConvertEvent {
   const ConvertEvent({required this.text});
@@ -23,9 +24,3 @@ String _textConvert(String input) {
   }
   return 'エラー：入力内容を再度確認してください。';
 }
-
-final Map<String, String> translationMap = {
-  'apple': 'りんご',
-  'banana': 'バナナ',
-  'orange': 'みかん',
-};
